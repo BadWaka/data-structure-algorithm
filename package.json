@@ -1,0 +1,22 @@
+{
+  "name": "data-structure-algorithm",
+  "version": "1.0.0",
+  "description": "数据结构与算法 by JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BadWaka/data-structure-algorithm.git"
+  },
+  "author": "waka",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BadWaka/data-structure-algorithm/issues"
+  },
+  "homepage": "https://github.com/BadWaka/data-structure-algorithm#readme",
+  "devDependencies": {
+    "bower": "^1.8.0"
+  }
+}

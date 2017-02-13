@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bubble Sort 冒泡排序</title>
+</head>
+
+<body>
+<h1>Bubble Sort</h1>
+<div>
+    <label>请输入一组数字，使用","区分</label>
+    <input id="arrayBeforeOrder" type="text">
+</div>
+<div>
+    <label>排序后的数组</label>
+    <span id="arrayAfterOrder"></span>
+</div>
+<button id="btnBubbleSort" onclick="clickBtnBubbleSort()">冒泡排序</button>
+</body>
+<script>
+    /**
+     * 冒泡排序按钮点击事件
+     */
+    function clickBtnBubbleSort() {
+        document.getElementById('btnBubbleSort');
+    }
+
+    /**
+     * 冒泡排序
+     * @param array
+     * @param order 顺序：0从小到大；1从大到小
+     *
+     * @return arrayAfterOrder
+     */
+    function bubbleSort(array, order) {
+        var t;
+        for (var i = 0; i < array.queueLength; i++) {
+            for (var j = 0; j < array.queueLength - i; j++) {
+                //从小到大
+                if (order === 0) {
+                    if (array[i] > array[j + 1]) {
+                        t = array[i];
+                        array[i] = array[j];
+                        array[j] = t;
+                    }
+                }
+                //从大到小
+                else {
+                    if (array[i] < array[j + 1]) {
+                        t = array[i];
+                        array[i] = array[j];
+                        array[j] = t;
+                    }
+                }
+            }
+        }
+        return array;
+    }
+</script>
+
+</html>

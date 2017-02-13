@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>PrimeNumber 求素数</title>
+    <style>
+        textarea {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+<h1>求素数</h1>
+<br/>
+<div>
+    <label>请输入一个正整数：</label>
+    <input id="max" type="number" min="0">
+</div>
+<br/>
+<div>
+    <label>素数：</label>
+    <textarea id="primeNumbers" rows="5"></textarea>
+</div>
+<br/>
+<div>
+    <button onclick="primeNumber(document.getElementById('max').value)">确定</button>
+</div>
+</body>
+<script>
+    /**
+     * 求出所有素数
+     *
+     * 原理是
+     *
+     * 所谓素数是指除了1和它本身以外，不能被任何整数整除的数，例如17就是素数，因为它不能被2~16的任一整数整除。因此判断一个整数m是否是素数，只需把m被2~m-1之间的每一个整数去除，如果都不能被整除，那么m就是一个素数
+     * 另外判断方法还可以简化。m不必呗2~m-1之间的每一个整数去除，只需被2~√m之间的每一个整数去除就可以了。如果m不能被2~√m间任一整数整除，m必定是素数。
+     * @param max
+     */
+    function primeNumber(max) {
+        if (!max) {
+            return;
+        }
+        var primeNumbers = [];
+        for (var i = 2; i <= max; i++) {
+            for (var j = 2; j <= Math.sqrt(i); j++) {
+                var isExactDivision = i % j;
+                console.log("dividend = " + i + " isExactDivision = " + isExactDivision);
+                if (isExactDivision == 0) { //被整除
+                    console.log(i + ' break');
+                    break;
+                }
+                if (j + 1 > Math.sqrt(i)) {
+                    primeNumbers.push(i);
+                }
+            }
+        }
+        document.getElementById('primeNumbers').value = primeNumbers;
+    }
+</script>
+
+</html>
