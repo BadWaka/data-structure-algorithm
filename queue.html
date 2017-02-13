@@ -34,8 +34,9 @@
 
         // 清空队列
         this.clearQueue = function () {
-            that.head = 0;
-            that.tail = 0;
+            console.log('清空队列');
+            that.queueHead = 0;
+            that.queueTail = 0;
             that.queueLength = 0;
             // that.queue.splice(0, that.queue.queueLength); // 这一步并不是必要的，因为队列的头、尾和长度一旦全部置为0，就已经找不到之前的数据了
         };
@@ -59,6 +60,7 @@
         this.enQueue = function (element) {
             // 如果队满, return false
             if (that.isQueueFull()) {
+                console.log('入队失败，队列已满 入队元素为 element = ' + element);
                 return false;
             }
             // 队尾插入
@@ -66,35 +68,59 @@
             that.queueTail++;
             that.queueTail = that.queueTail % that.queueCapacity;   // 要对队列容量做取余操作，才能实现环形队列
             that.queueLength++;
+            console.log('入队成功 入队元素为 element = ' + element);
             return true;
         };
 
         // 出队
         this.deQueue = function () {
             // 如果队空, return false
-            if (that.queueEmpty()) {
+            if (that.isQueueEmpty()) {
+                console.log('出队失败，队列为空');
                 return false;
             }
             var element = that.queue[that.queueHead];
             that.queueHead++;
             that.queueHead = that.queueHead % that.queueCapacity;   // 要对队列容量做取余操作，才能实现环形队列
             that.queueLength--;
+            console.log('出队成功 出队元素为 element = ' + element);
             return element;
         };
 
         // 遍历队列
         this.traverseQueue = function () {
+            var queuesStr = '';
             var i;
-            // 从队头开始，次数为队头下标加上队长度
-            for (i = that.queueHead; i < that.queueHead + that.queue.Length; i++) {
+            // 从队头开始，次数为队头下标加上队长度, 保证循环次数不受队头位置变化影响
+            for (i = that.queueHead; i < that.queueHead + that.queueLength; i++) {
                 var element = that.queue[i % that.queueCapacity];
-                console.log(element + ' ');
+                queuesStr += element + ' ';
             }
+            console.log('队列中所有元素 queuesStr = ' + queuesStr)
         };
     };
 
-    var circieQueueIns = new CircleQueue(4);
-    console.log(circieQueueIns);
+    // 测试用例
+    var ins = new CircleQueue(4);
+
+    ins.enQueue(10);
+    ins.enQueue(12);
+    ins.enQueue(16);
+    ins.enQueue(18);
+    ins.enQueue(20);
+    ins.traverseQueue();
+
+    ins.deQueue();
+    ins.deQueue();
+    ins.traverseQueue();
+
+    ins.clearQueue();
+    ins.traverseQueue();
+
+    ins.enQueue(20);
+    ins.enQueue(30);
+    ins.traverseQueue();
+    console.log(ins);
 
 </script>
 </body>
