@@ -52,7 +52,7 @@ var Stack = function (size) {
         // 这里要注意，栈顶指向的是一个空的地方，用来放元素的；所以取得时候先top--，再取值
         that.top--;
         var element = that.stack[that.top];
-        console.log('出栈成功 element = ' + element);
+        // console.log('出栈成功 element = ' + element);
         return element;
     };
 

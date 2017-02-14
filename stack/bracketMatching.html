@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bracket matching 栈的应用 括号匹配</title>
+</head>
+<body>
+
+<script src="stack.js"></script>
+<script>
+
+    /**
+     * 栈应用：括号匹配
+     *
+     * 描述：任意输入一组括号，可以判断括号是否匹配
+     * 字符串示例：[()] [()()] [()[()]] [[()]
+     */
+
+    var BracketMatching = function () {
+
+        this.stack = new Stack(100);
+        this.leftArray = ['{', '[', '('];
+        this.rightArray = ['}', ']', ')'];
+
+        var that = this;
+
+        this.matching = function (string) {
+            // 循环遍历传入的字符串
+            for (var i = 0; i < string.length; i++) {
+                // 获得字符
+                var char = string[i];
+                // 获得该字符在左括号数组里的index
+                var indexLeft = that.leftArray.indexOf(char);
+                // 判断该字符是否是左括号
+                if (indexLeft !== -1) {
+                    // 左括号;
+                    console.log('左括号 char = ' + char);
+                    // !==-1即代表是左括号
+                    // 将该符号需要匹配的另一半push进入stack，这样找的时候方便
+                    that.stack.push(that.rightArray[indexLeft]);
+                } else {
+                    // 右括号
+                    console.log('右括号 char = ' + char);
+                    // 取出栈顶元素;注意这里要减一，因为栈顶是要大一号的
+                    var topElement = that.stack.stack[that.stack.top - 1];
+                    // 如果字符与栈顶元素相等
+                    if (char === topElement) {
+                        // 匹配成功
+                        // 出栈
+                        that.stack.pop();
+                    } else {
+                        // 匹配失败
+                        console.log('匹配失败');
+                        return false;
+                    }
+                }
+            }
+            console.log('匹配成功');
+            return true;    // 只要没有雨中途return false的都成功
+        };
+    };
+
+    // 测试case
+
+    var ins = new BracketMatching();
+    ins.matching('[({()})]');
+    ins.matching('[({(})]');
+
+
+</script>
+</body>
+</html>
