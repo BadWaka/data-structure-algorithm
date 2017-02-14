@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>coordinateStack</title>
+</head>
+<body>
+<script src="stack.js"></script>
+<script>
+
+    // 坐标类
+    var Coordinate = function (x, y) {
+
+        this.x = this.y = 0;    // 默认为0
+
+        if (x)
+            this.x = x;
+        if (y)
+            this.y = y;
+
+        var that = this;
+
+        this.printCoordinate = function () {
+            console.log('(' + that.x + ',' + that.y + ')');
+        };
+    };
+
+    var coordIns = new Stack(5);
+    coordIns.push(new Coordinate(12, 24));
+
+    coordIns.traverseStack(false, function (element) {
+        console.log('(' + element.x + ',' + element.y + ')');
+    });
+
+</script>
+</body>
+</html>
