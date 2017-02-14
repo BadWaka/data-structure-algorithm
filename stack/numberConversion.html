@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>number conversion 栈的应用 数制转换</title>
+</head>
+<body>
+<script src="stack.js"></script>
+<script>
+
+    // 数制转换
+
+    var NumberConversion = function () {
+
+        this.stack = new Stack(100);
+        this.hexadecimalArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'e', 'f'];   // 十六进制数组显示
+
+        var that = this;
+
+        /**
+         * 转换
+         *
+         * @param number    数值
+         * @param mode      进制
+         */
+        this.convert = function (number, mode) {
+
+            if (mode !== 2 && mode !== 8 && mode !== 16) {
+                console.log('进制错误，请输入2或8或16');
+                return false;
+            }
+
+            var quotient = Math.floor(number / mode);   // 商;等于number除以进制
+            // console.log('商 quotient = ' + quotient);
+            var remainder = number % mode;  // 余数;等于number对mode取余
+            // console.log('余数 remainder = ' + remainder);
+            that.stack.push(remainder); // 余数入栈
+            that.stack.traverseStack(); // 遍历栈
+
+            // 如果商为0，打印栈内元素
+            if (quotient === 0) {
+                var result = '';
+                // 倒序遍历数组
+                console.log('倒序遍历数组');
+                that.stack.traverseStack(true, function (element) {
+                    // 如果是16进制，10以上的数字会无法表示，所以需要做一个转换
+                    if (mode === 16) {
+                        result += that.hexadecimalArray[element];
+                    }
+                    // 其他进制不会超过10，没有问题，不需要转换
+                    else {
+                        result += element;
+                    }
+                });
+                // 清空栈
+                that.stack.clearStack();
+                console.log(that.stack);
+                // 返回得到的值
+                return result;
+            }
+            // 如果商不为0，递归，继续该过程
+            // 使用尾递归，把递归放在最后，回归过程中不用做任何操作
+            // 这里加return是因为可以返回最后得到的值
+            else {
+                return that.convert(quotient, mode);
+            }
+        };
+    };
+
+    // 测试case
+
+    var ins = new NumberConversion();
+
+    console.log(ins.convert(157854, 2));
+    console.log(ins.convert(157854, 8));
+    console.log(ins.convert(157854, 16));
+
+</script>
+</body>
+</html>

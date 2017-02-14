@@ -9,7 +9,6 @@ var Stack = function (size) {
     this.stack = new Array(size);   // 新建内存空间
     this.size = size;   // 栈容量
     this.top = 0;   // 栈顶
-
     var that = this;
 
     // 判断栈是否为空
