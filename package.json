@@ -1,7 +1,7 @@
 {
   "name": "data-structure-algorithm",
   "version": "1.0.0",
-  "description": "数据结构与算法 by JavaScript",
+  "description": "数据结构与算法",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
